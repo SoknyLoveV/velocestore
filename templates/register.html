@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}Register Account{% endblock %}
+
+{% block content %}
+<div class="container py-5 my-4">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+      <div class="auth-card bg-white shadow-lg">
+        <div class="text-center mb-4">
+          <h2 class="fw-extrabold mb-1" style="font-family: var(--font-heading);">Create Account</h2>
+          <p class="text-muted small">Join VeloceStore to manage orders and track carts</p>
+        </div>
+
+        <form action="{{ url_for('register') }}" method="POST">
+          <div class="mb-3">
+            <label for="username" class="form-label text-muted small fw-semibold">Username</label>
+            <div class="input-group">
+              <span class="input-group-text border-light bg-light text-muted"><i class="fas fa-user"></i></span>
+              <input type="text" id="username" name="username" class="form-control form-control-custom" placeholder="johndoe" required>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="email" class="form-label text-muted small fw-semibold">Email Address</label>
+            <div class="input-group">
+              <span class="input-group-text border-light bg-light text-muted"><i class="fas fa-envelope"></i></span>
+              <input type="email" id="email" name="email" class="form-control form-control-custom" placeholder="john@example.com" required>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="password" class="form-label text-muted small fw-semibold">Password</label>
+            <div class="input-group">
+              <span class="input-group-text border-light bg-light text-muted"><i class="fas fa-lock"></i></span>
+              <input type="password" id="password" name="password" class="form-control form-control-custom" placeholder="Minimum 6 characters" minlength="6" required>
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label for="confirm_password" class="form-label text-muted small fw-semibold">Confirm Password</label>
+            <div class="input-group">
+              <span class="input-group-text border-light bg-light text-muted"><i class="fas fa-shield-alt"></i></span>
+              <input type="password" id="confirm_password" name="confirm_password" class="form-control form-control-custom" placeholder="Repeat your password" minlength="6" required>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary-custom w-100 py-3 mb-3">
+            <i class="fas fa-user-plus me-2"></i> Register Account
+          </button>
+        </form>
+
+        <div class="text-center mt-3 pt-3 border-top border-light">
+          <span class="text-muted small">Already have an account? </span>
+          <a href="{{ url_for('login') }}" class="small text-decoration-none text-primary fw-bold">Sign In here</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

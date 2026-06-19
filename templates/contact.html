@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+
+{% block title %}Contact Support{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="text-center mb-5">
+    <span class="text-primary fw-bold text-uppercase small tracking-wider">Get In Touch</span>
+    <h1 class="fw-extrabold mt-1">We'd Love to Hear From You</h1>
+    <div class="mx-auto bg-primary rounded" style="width: 60px; height: 3px;"></div>
+  </div>
+
+  <div class="row g-5">
+    <!-- Contact Info Cards Column -->
+    <div class="col-lg-5">
+      <div class="d-flex flex-column gap-4">
+        <!-- Card 1 -->
+        <div class="card border-light shadow-sm rounded-4 bg-white p-4">
+          <div class="d-flex align-items-center gap-3">
+            <div class="rounded-3 bg-primary-subtle text-primary d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+              <i class="fas fa-map-marker-alt fa-lg"></i>
+            </div>
+            <div>
+              <h5 class="fw-bold mb-1">Our Office Address</h5>
+              <p class="text-muted small mb-0">100 E-Commerce Plaza, Suite 400, Tech City, TC 90210</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card border-light shadow-sm rounded-4 bg-white p-4">
+          <div class="d-flex align-items-center gap-3">
+            <div class="rounded-3 bg-primary-subtle text-primary d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+              <i class="fas fa-envelope fa-lg"></i>
+            </div>
+            <div>
+              <h5 class="fw-bold mb-1">Email Customer Support</h5>
+              <p class="text-muted small mb-0">support@velocestore.com (Avg. reply: 2 hours)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card border-light shadow-sm rounded-4 bg-white p-4">
+          <div class="d-flex align-items-center gap-3">
+            <div class="rounded-3 bg-primary-subtle text-primary d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+              <i class="fas fa-phone-alt fa-lg"></i>
+            </div>
+            <div>
+              <h5 class="fw-bold mb-1">Call Our Hotline</h5>
+              <p class="text-muted small mb-0">+1 (555) 019-2834 (Mon-Fri, 9am - 6pm EST)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Visual map placeholder with premium dark styling -->
+        <div class="card border-light shadow-sm rounded-4 overflow-hidden bg-white p-2">
+          <div class="rounded-3 d-flex align-items-center justify-content-center text-white" 
+               style="height: 180px; background: linear-gradient(135deg, rgba(99,102,241,0.8), rgba(168,85,247,0.8)), url('https://i.imgur.com/71P4o2Q.png') center/cover;">
+            <div class="text-center p-3">
+              <i class="fas fa-map-marked-alt fa-2x mb-2"></i>
+              <h6 class="fw-bold mb-0">Interactive Directions</h6>
+              <span class="small opacity-80">Click to view on Google Maps</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Form Column -->
+    <div class="col-lg-7">
+      <div class="card border-light shadow-sm rounded-4 bg-white p-4 p-md-5">
+        <h4 class="fw-extrabold mb-4" style="font-family: var(--font-heading);">Send a Message</h4>
+        
+        <form action="{{ url_for('contact') }}" method="POST">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label for="name" class="form-label text-muted small fw-semibold">Your Name</label>
+              <div class="input-group">
+                <span class="input-group-text border-light bg-light text-muted"><i class="fas fa-user"></i></span>
+                <input type="text" id="name" name="name" class="form-control form-control-custom" placeholder="John Doe" required>
+              </div>
+            </div>
+            
+            <div class="col-md-6">
+              <label for="email" class="form-label text-muted small fw-semibold">Email Address</label>
+              <div class="input-group">
+                <span class="input-group-text border-light bg-light text-muted"><i class="fas fa-envelope"></i></span>
+                <input type="email" id="email" name="email" class="form-control form-control-custom" placeholder="you@example.com" required>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <label for="subject" class="form-label text-muted small fw-semibold">Subject</label>
+              <div class="input-group">
+                <span class="input-group-text border-light bg-light text-muted"><i class="fas fa-heading"></i></span>
+                <input type="text" id="subject" name="subject" class="form-control form-control-custom" placeholder="How can we help you?" required>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <label for="message" class="form-label text-muted small fw-semibold">Detailed Message</label>
+              <div class="input-group">
+                <span class="input-group-text border-light bg-light text-muted" style="align-items: flex-start; pt-3;"><i class="fas fa-comment-alt pt-1"></i></span>
+                <textarea id="message" name="message" rows="4" class="form-control form-control-custom" placeholder="Write details about your question, shipping delay, or product sizing queries..." required></textarea>
+              </div>
+            </div>
+
+            <div class="col-12 mt-4">
+              <button type="submit" class="btn btn-primary-custom w-100 py-3 d-flex align-items-center justify-content-center gap-2">
+                <i class="fas fa-paper-plane"></i>
+                <span>Submit Inquiry</span>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

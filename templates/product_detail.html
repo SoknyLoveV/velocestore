@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ product.title }}{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <!-- Back Link -->
+  <div class="mb-4">
+    <a href="{{ url_for('products') }}" class="text-decoration-none text-muted d-inline-flex align-items-center gap-2 hover-text-primary">
+      <i class="fas fa-arrow-left"></i>
+      <span>Back to Products Catalog</span>
+    </a>
+  </div>
+
+  <!-- Product Detail Showcase -->
+  <div class="row g-5">
+    <!-- Image Gallery Section -->
+    <div class="col-md-6">
+      <div class="card border-light shadow-sm rounded-4 overflow-hidden bg-white p-4 d-flex align-items-center justify-content-center" style="min-height: 400px;">
+        <img src="{{ product.image }}" alt="{{ product.title }}" class="img-fluid" style="max-height: 450px; object-fit: contain;">
+      </div>
+    </div>
+
+    <!-- Product Text Details Section -->
+    <div class="col-md-6 d-flex flex-column justify-content-between py-2">
+      <div>
+        <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2 rounded-pill fw-semibold text-uppercase tracking-wider mb-3">
+          {% if product.category == 'jewelery' %}
+            Jewelry
+          {% else %}
+            {{ product.category }}
+          {% endif %}
+        </span>
+        <h1 class="display-5 fw-extrabold mb-3" style="font-family: var(--font-heading); font-size: 2.25rem;">
+          {{ product.title }}
+        </h1>
+
+        <!-- Ratings & Reviews -->
+        {% if product.rating %}
+          <div class="d-flex align-items-center gap-3 mb-4">
+            <span class="rating-badge py-2 px-3 fs-6">
+              <i class="fas fa-star text-warning"></i>
+              <span>{{ product.rating.rate }}</span>
+            </span>
+            <span class="text-muted small">
+              <i class="fas fa-comment-dots me-1 text-secondary"></i> Based on {{ product.rating.count }} customer reviews
+            </span>
+          </div>
+        {% endif %}
+
+        <!-- Pricing Tag -->
+        <h3 class="display-6 fw-bold text-primary mb-4" style="font-family: var(--font-heading);">
+          ${{ "%.2f"|format(product.price) }}
+        </h3>
+
+        <!-- Description Box -->
+        <div class="border-top border-light pt-4 mb-4">
+          <h5 class="fw-bold mb-2">Description</h5>
+          <p class="text-muted" style="line-height: 1.6;">
+            {{ product.description }}
+          </p>
+        </div>
+      </div>
+
+      <!-- Add to Cart Widget -->
+      <div class="card border-light shadow-sm rounded-4 bg-white p-4">
+        <form action="{{ url_for('add_to_cart', id=product.id) }}" method="GET" class="row g-3 align-items-center">
+          <div class="col-md-4">
+            <label for="qty" class="form-label text-muted small fw-semibold">Quantity</label>
+            <div class="product-qty-control w-100 justify-content-between">
+              <button type="button" class="btn" onclick="decreaseQty()">-</button>
+              <input type="number" id="qty" name="qty" value="1" min="1" max="100" class="qty-value border-0 bg-transparent text-center" style="width: 50px;" readonly>
+              <button type="button" class="btn" onclick="increaseQty()">+</button>
+            </div>
+          </div>
+          <div class="col-md-8 pt-md-4">
+            <button type="submit" class="btn btn-primary-custom w-100 py-3 d-flex align-items-center justify-content-center gap-2">
+              <i class="fas fa-shopping-cart"></i>
+              <span>Add To Cart</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Related Products Section -->
+  {% if related_products %}
+    <div class="mt-5 pt-5 border-top border-light">
+      <div class="mb-4">
+        <span class="text-primary fw-bold text-uppercase small tracking-wider">Recommended Just For You</span>
+        <h2 class="fw-extrabold mt-1">Related Products</h2>
+      </div>
+      <div class="row g-4">
+        {% for prod in related_products %}
+          <div class="col-sm-6 col-md-4 col-lg-3">
+            {% set product = prod %}
+            {% include 'components/product_card.html' %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  function decreaseQty() {
+    var qtyInput = document.getElementById('qty');
+    var val = parseInt(qtyInput.value);
+    if (val > 1) {
+      qtyInput.value = val - 1;
+    }
+  }
+
+  function increaseQty() {
+    var qtyInput = document.getElementById('qty');
+    var val = parseInt(qtyInput.value);
+    if (val < 100) {
+      qtyInput.value = val + 1;
+    }
+  }
+</script>
+{% endblock %}

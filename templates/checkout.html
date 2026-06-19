@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+{% block title %}Checkout{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <h1 class="fw-extrabold mb-5" style="font-family: var(--font-heading);">Checkout</h1>
+
+  <div class="row g-5">
+    <!-- Shipping Information Form Section -->
+    <div class="col-lg-7">
+      <div class="card border-light shadow-sm rounded-4 bg-white p-4">
+        <h4 class="fw-extrabold mb-4" style="font-family: var(--font-heading);">Shipping Details</h4>
+        
+        <form action="{{ url_for('checkout') }}" method="POST">
+          <div class="mb-3">
+            <label for="name" class="form-label text-muted small fw-semibold">Full Name</label>
+            <div class="input-group">
+              <span class="input-group-text border-light bg-light text-muted"><i class="fas fa-user"></i></span>
+              <input type="text" id="name" name="name" class="form-control form-control-custom" placeholder="John Doe" required>
+            </div>
+          </div>
+          
+          <div class="mb-3">
+            <label for="phone" class="form-label text-muted small fw-semibold">Phone Number</label>
+            <div class="input-group">
+              <span class="input-group-text border-light bg-light text-muted"><i class="fas fa-phone"></i></span>
+              <input type="tel" id="phone" name="phone" class="form-control form-control-custom" placeholder="0123456789" required>
+            </div>
+          </div>
+          
+          <div class="mb-4">
+            <label for="address" class="form-label text-muted small fw-semibold">Delivery Address</label>
+            <div class="input-group">
+              <span class="input-group-text border-light bg-light text-muted"><i class="fas fa-map-marker-alt"></i></span>
+              <textarea id="address" name="address" rows="3" class="form-control form-control-custom" placeholder="123 Main St, Apartment 4B, City, Country" required></textarea>
+            </div>
+          </div>
+
+          <div class="alert alert-info border-0 rounded-3 d-flex align-items-center gap-2 mb-4">
+            <i class="fas fa-info-circle fa-lg"></i>
+            <span class="small">We support Cash on Delivery (COD) and all major credit cards at delivery. No prepayment required!</span>
+          </div>
+
+          <button type="submit" class="btn btn-primary-custom w-100 py-3 d-flex align-items-center justify-content-center gap-2">
+            <i class="fas fa-check-circle"></i>
+            <span>Place Order (${{ "%.2f"|format(totals.grand_total) }})</span>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Summary Column -->
+    <div class="col-lg-5">
+      <div class="card border-light shadow-sm rounded-4 bg-white p-4">
+        <h4 class="fw-extrabold mb-4" style="font-family: var(--font-heading);">Order Summary</h4>
+        
+        <!-- Cart Items List Summary -->
+        <div class="mb-4" style="max-height: 250px; overflow-y: auto;">
+          {% for item in cart_items %}
+            <div class="d-flex align-items-center gap-3 mb-3 pb-3 border-bottom border-light">
+              <div class="p-1 border rounded bg-white d-flex align-items-center justify-content-center" style="width: 50px; height: 50px; flex-shrink: 0;">
+                <img src="{{ item.product.image }}" alt="{{ item.product.title }}" class="img-fluid" style="max-height: 40px; object-fit: contain;">
+              </div>
+              <div class="flex-grow-1 min-w-0">
+                <h6 class="fw-bold mb-0 text-truncate text-dark" style="font-size: 0.9rem;">{{ item.product.title }}</h6>
+                <span class="text-muted small">Qty: {{ item.quantity }} &times; ${{ "%.2f"|format(item.product.price) }}</span>
+              </div>
+              <span class="fw-bold text-dark" style="font-size: 0.9rem;">
+                ${{ "%.2f"|format(item.subtotal) }}
+              </span>
+            </div>
+          {% endfor %}
+        </div>
+
+        <!-- Costs Breakdown -->
+        <div class="d-flex justify-content-between mb-2 small text-muted">
+          <span>Subtotal</span>
+          <span>${{ "%.2f"|format(totals.subtotal) }}</span>
+        </div>
+        <div class="d-flex justify-content-between mb-2 small text-muted">
+          <span>Sales Tax (8%)</span>
+          <span>${{ "%.2f"|format(totals.tax) }}</span>
+        </div>
+        <div class="d-flex justify-content-between mb-3 small text-muted">
+          <span>Shipping</span>
+          <span class="text-success fw-bold">FREE</span>
+        </div>
+
+        <hr class="border-light my-2">
+
+        <div class="d-flex justify-content-between align-items-center mb-0">
+          <span class="fw-bold text-dark">Grand Total</span>
+          <span class="fw-extrabold h4 text-primary mb-0">${{ "%.2f"|format(totals.grand_total) }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

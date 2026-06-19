@@ -1,0 +1,126 @@
+<footer class="footer-custom">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4 col-md-6">
+        <h5 class="d-flex align-items-center gap-2">
+          <i class="fas fa-shopping-bag text-primary"></i>
+          <span>VeloceStore</span>
+        </h5>
+
+    <p class="text-muted small">
+      Discover a curated collection of premium clothing, jewelry, and electronics.
+      Powered by FakeStore API, styled with Bootstrap 5, and built with Flask.
+    </p>
+
+    <div class="d-flex gap-3 mt-3">
+      <a href="#" class="text-white opacity-70 hover-opacity-100">
+        <i class="fab fa-facebook fa-lg"></i>
+      </a>
+
+      <a href="#" class="text-white opacity-70 hover-opacity-100">
+        <i class="fab fa-twitter fa-lg"></i>
+      </a>
+
+      <a href="#" class="text-white opacity-70 hover-opacity-100">
+        <i class="fab fa-instagram fa-lg"></i>
+      </a>
+
+      <a href="#" class="text-white opacity-70 hover-opacity-100">
+        <i class="fab fa-github fa-lg"></i>
+      </a>
+    </div>
+  </div>
+
+  <div class="col-lg-2 col-md-6">
+    <h5>Quick Links</h5>
+
+    <ul class="list-unstyled">
+      <li>
+        <a href="{{ url_for('home') }}" class="footer-link">
+          Home
+        </a>
+      </li>
+
+      <li>
+        <a href="{{ url_for('products') }}" class="footer-link">
+          Shop Catalog
+        </a>
+      </li>
+
+      <li>
+        <a href="{{ url_for('contact') }}" class="footer-link">
+          Contact Us
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="col-lg-3 col-md-6">
+    <h5>Shop Categories</h5>
+
+    <ul class="list-unstyled">
+      <li>
+        <a href="{{ url_for('products', category='electronics') }}" class="footer-link">
+          Electronics
+        </a>
+      </li>
+
+      <li>
+        <a href="{{ url_for('products', category='jewelery') }}" class="footer-link">
+          Jewelry
+        </a>
+      </li>
+
+      <li>
+        <a href="{{ url_for('products', category='mens clothing') }}" class="footer-link">
+          Men's Clothing
+        </a>
+      </li>
+
+      <li>
+        <a href="{{ url_for('products', category='womens clothing') }}" class="footer-link">
+          Women's Clothing
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="col-lg-3 col-md-6">
+    <h5>Customer Support</h5>
+
+    <p class="text-muted small mb-2">
+      Have questions or need help? Get in touch with our team.
+    </p>
+
+    <p class="text-white small mb-1">
+      <i class="fas fa-envelope me-2 text-primary"></i>
+      support@velocestore.com
+    </p>
+
+    <p class="text-white small">
+      <i class="fas fa-phone me-2 text-primary"></i>
+      +1 (555) 019-2834
+    </p>
+  </div>
+</div>
+
+<hr class="border-secondary my-4 opacity-20">
+
+<div class="row align-items-center">
+  <div class="col-md-6 text-center text-md-start">
+    <p class="small text-muted mb-0">
+      &copy; 2026 VeloceStore. All rights reserved.
+    </p>
+  </div>
+
+  <div class="col-md-6 text-center text-md-end mt-2 mt-md-0">
+    <img
+      src="https://i.imgur.com/k912W7p.png"
+      alt="Payment Methods"
+      style="height:25px; filter:grayscale(1) brightness(1.5); opacity:0.5;"
+    >
+  </div>
+</div>
+
+  </div>
+</footer>

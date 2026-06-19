@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+
+{% block title %}Elevate Your Shopping Experience{% endblock %}
+
+{% block content %}
+<!-- Hero Banner -->
+<section class="hero-gradient d-flex align-items-center">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6 text-center text-lg-start">
+        <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2 rounded-pill fw-semibold mb-3">
+          ✨ Summer Season Sale - Up to 40% Off
+        </span>
+        <h1 class="display-3 fw-extrabold mb-3 text-dark leading-sm" style="font-family: var(--font-heading);">
+          Style Redefined.<br>Space Reimagined.
+        </h1>
+        <p class="lead text-muted mb-4 fs-5">
+          Explore our exclusive, high-quality collection of electronics, hand-crafted jewelry, and modern apparel curated specifically for you.
+        </p>
+        <div class="d-flex justify-content-center justify-content-lg-start gap-3">
+          <a href="{{ url_for('products') }}" class="btn btn-primary-custom px-4 py-3">
+            <i class="fas fa-shopping-bag me-2"></i> Shop Catalog
+          </a>
+          <a href="#categories-section" class="btn btn-secondary-custom px-4 py-3">
+            Explore Categories
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-6 text-center d-none d-lg-block">
+        <!-- Modern illustrative overlay stack using CSS gradients or a high quality image -->
+        <div class="position-relative d-inline-block">
+          <div class="position-absolute top-50 start-50 translate-middle bg-primary rounded-circle filter-blur" style="width: 350px; height: 350px; filter: blur(80px); opacity: 0.15; z-index: -1;"></div>
+          <img src="{{ url_for('static', filename='images/hero.png') }}" alt="Featured Collections" class="img-fluid rounded-4" style="max-height: 480px; filter: drop-shadow(0 15px 30px rgba(99,102,241,0.25));">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Categories Section -->
+<section id="categories-section" class="py-5 bg-white border-bottom border-light">
+  <div class="container py-4">
+    <div class="text-center mb-5">
+      <span class="text-primary fw-bold text-uppercase small tracking-wider">Browse Collections</span>
+      <h2 class="h1 fw-extrabold mt-1">Shop by Category</h2>
+      <div class="mx-auto bg-primary rounded" style="width: 60px; height: 3px;"></div>
+    </div>
+    <div class="row g-4 justify-content-center">
+      {% for cat in categories %}
+        <div class="col-6 col-md-3">
+          <a href="{{ url_for('products', category=cat) }}" class="text-decoration-none text-dark">
+            <div class="category-card">
+              <div class="mb-3 text-primary">
+                {% if cat == 'electronics' %}
+                  <i class="fas fa-laptop-code fa-3x"></i>
+                {% elif cat == 'jewelery' %}
+                  <i class="fas fa-gem fa-3x"></i>
+                {% elif cat == "men's clothing" %}
+                  <i class="fas fa-tshirt fa-3x"></i>
+                {% elif cat == "women's clothing" %}
+                  <i class="fas fa-female fa-3x"></i>
+                {% else %}
+                  <i class="fas fa-tags fa-3x"></i>
+                {% endif %}
+              </div>
+              <h5 class="card-title text-capitalize mb-0" style="font-size: 1.05rem;">
+                {% if cat == 'jewelery' %}
+                  Jewelry
+                {% else %}
+                  {{ cat }}
+                {% endif %}
+              </h5>
+            </div>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Featured Products Section -->
+<section class="py-5">
+  <div class="container py-4">
+    <div class="d-flex justify-content-between align-items-end mb-4">
+      <div>
+        <span class="text-primary fw-bold text-uppercase small tracking-wider">Customer Favorites</span>
+        <h2 class="fw-extrabold mt-1 mb-0">Featured Products</h2>
+      </div>
+      <a href="{{ url_for('products') }}" class="btn btn-secondary-custom py-2 px-4 d-flex align-items-center gap-2">
+        <span>View All</span>
+        <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+    <div class="row g-4">
+      {% for product in featured_products %}
+        <div class="col-sm-6 col-md-4 col-lg-3">
+          {% include 'components/product_card.html' %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Latest Products Section -->
+<section class="py-5 bg-white border-top border-bottom border-light">
+  <div class="container py-4">
+    <div class="d-flex justify-content-between align-items-end mb-4">
+      <div>
+        <span class="text-primary fw-bold text-uppercase small tracking-wider">New Arrivals</span>
+        <h2 class="fw-extrabold mt-1 mb-0">Latest Products</h2>
+      </div>
+      <a href="{{ url_for('products', sort='id_desc') }}" class="btn btn-secondary-custom py-2 px-4 d-flex align-items-center gap-2">
+        <span>View Latest</span>
+        <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+    <div class="row g-4">
+      {% for product in latest_products %}
+        <div class="col-sm-6 col-md-4 col-lg-3">
+          {% include 'components/product_card.html' %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Promotional Banner -->
+<section class="py-5 my-4">
+  <div class="container">
+    <div class="p-5 rounded-4 text-white text-center position-relative overflow-hidden" style="background: linear-gradient(135deg, var(--primary), var(--secondary)); box-shadow: var(--shadow-lg);">
+      <div class="position-absolute top-0 start-0 w-100 h-100 bg-black opacity-10"></div>
+      <div class="position-relative z-index-1 py-4">
+        <h3 class="display-5 fw-extrabold mb-3">Join the E-Store Club</h3>
+        <p class="lead mx-auto mb-4" style="max-width: 600px;">
+          Register an account today and enjoy custom cart tracking, saved orders, secure checkout, and instant support.
+        </p>
+        {% if not session.get('user') %}
+          <a href="{{ url_for('register') }}" class="btn btn-light btn-lg px-5 text-primary fw-bold shadow-md hover-scale">
+            Create Free Account
+          </a>
+        {% else %}
+          <a href="{{ url_for('products') }}" class="btn btn-light btn-lg px-5 text-primary fw-bold shadow-md hover-scale">
+            Start Shopping Now
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
