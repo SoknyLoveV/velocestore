@@ -513,11 +513,22 @@ if __name__ == '__main__':
     # Listen on all interface IPs for ease of testing
     app.run(host='0.0.0.0', port=5000, debug=True)
 
-@app.route('/test-api')
+@app.route("/test-api")
 def test_api():
-    products = product_service.get_all_products()
+    import requests
 
-    return {
-        "count": len(products),
-        "first_product": products[0] if products else None
-    }
+    try:
+        r = requests.get(
+            "https://fakestoreapi.com/products",
+            timeout=15
+        )
+
+        return {
+            "status_code": r.status_code,
+            "data": r.json()
+        }
+
+    except Exception as e:
+        return {
+            "error": str(e)
+        }
