@@ -512,3 +512,12 @@ def internal_server_error(e):
 if __name__ == '__main__':
     # Listen on all interface IPs for ease of testing
     app.run(host='0.0.0.0', port=5000, debug=True)
+
+@app.route('/test-api')
+def test_api():
+    products = product_service.get_all_products()
+
+    return {
+        "count": len(products),
+        "first_product": products[0] if products else None
+    }
